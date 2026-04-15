@@ -7,8 +7,8 @@ import { DDDSuper } from "@haxtheweb/d-d-d/d-d-d.js";
 import { I18NMixin } from "@haxtheweb/i18n-manager/lib/I18NMixin.js";
 
 /**
- * `bull-playlist`
- * 
+ * `bull-playlist-card`
+ *
  * @demo index.html
  * @element bull-playlist-card
  */
@@ -20,51 +20,38 @@ export class BullPlaylistCard extends DDDSuper(I18NMixin(LitElement)) {
 
   constructor() {
     super();
-    
-   }
+    this.src = "";
+  }
 
-  // Lit reactive properties
   static get properties() {
     return {
       ...super.properties,
-      title: { type: String },
+      src: { type: String },
     };
   }
 
-  // Lit scoped styles
   static get styles() {
     return [super.styles,
     css`
       :host {
         display: block;
-        color: var(--ddd-theme-primary);
-        background-color: var(--ddd-theme-accent);
-        font-family: var(--ddd-font-navigation);
+        width: 100%;
       }
-      .wrapper {
-        margin: var(--ddd-spacing-2);
-        padding: var(--ddd-spacing-4);
-      }
-      h3 span {
-        font-size: var(--bull-app-label-font-size, var(--ddd-font-size-s));
+      img {
+        width: 100%;
+        height: 450px;
+        object-fit: cover;
+        display: block;
       }
     `];
   }
 
-  // Lit render the HTML
   render() {
-    return html`
-<div class="wrapper">
-  <slot></slot>
-</div>`;
+    return html`<img src="${this.src}" alt="">`;
   }
 
-  /**
-   * haxProperties integration via file reference
-   */
   static get haxProperties() {
-    return new URL(`./lib/${this.tag}.haxProperties.json`, import.meta.url)
-      .href;
+    return new URL(`./lib/${this.tag}.haxProperties.json`, import.meta.url).href;
   }
 }
 

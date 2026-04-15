@@ -7,8 +7,8 @@ import { DDDSuper } from "@haxtheweb/d-d-d/d-d-d.js";
 import { I18NMixin } from "@haxtheweb/i18n-manager/lib/I18NMixin.js";
 
 /**
- * `bull-playlist`
- * 
+ * `bull-playlist-arrow`
+ *
  * @demo index.html
  * @element bull-playlist-arrow
  */
@@ -20,51 +20,61 @@ export class BullPlaylistArrow extends DDDSuper(I18NMixin(LitElement)) {
 
   constructor() {
     super();
-    
-   }
+    this.direction = "left";
+  }
 
-  // Lit reactive properties
   static get properties() {
     return {
       ...super.properties,
-      title: { type: String },
+      direction: { type: String },
     };
   }
 
-  // Lit scoped styles
   static get styles() {
     return [super.styles,
     css`
       :host {
         display: block;
-        color: var(--ddd-theme-primary);
-        background-color: var(--ddd-theme-accent);
-        font-family: var(--ddd-font-navigation);
       }
-      .wrapper {
-        margin: var(--ddd-spacing-2);
-        padding: var(--ddd-spacing-4);
+      button {
+        background-color: rgba(0, 0, 0, 0.5);
+        border: none;
+        border-radius: 50%;
+        color: white;
+        cursor: pointer;
+        font-size: 2rem;
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        transition: background-color 0.2s;
       }
-      h3 span {
-        font-size: var(--bull-app-label-font-size, var(--ddd-font-size-s));
+      button:hover {
+        background-color: rgba(0, 0, 0, 0.8);
       }
     `];
   }
 
-  // Lit render the HTML
-  render() {
-    return html`
-<div class="wrapper">
-  <slot></slot>
-</div>`;
+  _handleClick() {
+    this.dispatchEvent(new CustomEvent('arrow-clicked', {
+      detail: { direction: this.direction },
+      bubbles: true,
+      composed: true,
+    }));
   }
 
-  /**
-   * haxProperties integration via file reference
-   */
+  render() {
+    return html`
+      <button @click="${this._handleClick}" aria-label="${this.direction === 'left' ? 'Previous' : 'Next'}">
+        ${this.direction === 'left' ? '‹' : '›'}
+      </button>
+    `;
+  }
+
   static get haxProperties() {
-    return new URL(`./lib/${this.tag}.haxProperties.json`, import.meta.url)
-      .href;
+    return new URL(`./lib/${this.tag}.haxProperties.json`, import.meta.url).href;
   }
 }
 

@@ -5,10 +5,13 @@
 import { LitElement, html, css } from "lit";
 import { DDDSuper } from "@haxtheweb/d-d-d/d-d-d.js";
 import { I18NMixin } from "@haxtheweb/i18n-manager/lib/I18NMixin.js";
+import "./bull-playlist-card.js";
+import "./bull-playlist-arrow.js";
+import "./bull-playlist-indicator.js";
 
 /**
  * `bull-playlist`
- * 
+ *
  * @demo index.html
  * @element bull-playlist
  */
@@ -20,51 +23,93 @@ export class BullPlaylist extends DDDSuper(I18NMixin(LitElement)) {
 
   constructor() {
     super();
-    
-   }
+    this.activeIndex = 0;
+    this.images = [
+      "https://picsum.photos/seed/bull1/1200/450",
+      "https://picsum.photos/seed/bull2/1200/450",
+      "https://picsum.photos/seed/bull3/1200/450",
+      "https://picsum.photos/seed/bull4/1200/450",
+      "https://picsum.photos/seed/bull5/1200/450",
+    ];
+  }
 
-  // Lit reactive properties
   static get properties() {
     return {
       ...super.properties,
-      title: { type: String },
+      images: { type: Array },
+      activeIndex: { type: Number },
     };
   }
 
-  // Lit scoped styles
   static get styles() {
     return [super.styles,
     css`
       :host {
         display: block;
-        color: var(--ddd-theme-primary);
-        background-color: var(--ddd-theme-accent);
-        font-family: var(--ddd-font-navigation);
+        width: 100%;
       }
-      .wrapper {
-        margin: var(--ddd-spacing-2);
-        padding: var(--ddd-spacing-4);
+      .playlist {
+        position: relative;
+        width: 100%;
+        background-color: #000;
       }
-      h3 span {
-        font-size: var(--bull-app-label-font-size, var(--ddd-font-size-s));
+      .arrows {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 var(--ddd-spacing-3, 12px);
+        box-sizing: border-box;
+        pointer-events: none;
+        z-index: 1;
+      }
+      .arrows bull-playlist-arrow {
+        pointer-events: all;
+      }
+      .indicators {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
       }
     `];
   }
 
-  // Lit render the HTML
-  render() {
-    return html`
-<div class="wrapper">
-  <slot></slot>
-</div>`;
+  _handleArrow(e) {
+    const { direction } = e.detail;
+    if (direction === 'left') {
+      this.activeIndex = (this.activeIndex - 1 + this.images.length) % this.images.length;
+    } else {
+      this.activeIndex = (this.activeIndex + 1) % this.images.length;
+    }
   }
 
-  /**
-   * haxProperties integration via file reference
-   */
+  _handleIndicator(e) {
+    this.activeIndex = e.detail.index;
+  }
+
+  render() {
+    return html`
+      <div class="playlist">
+        <bull-playlist-card src="${this.images[this.activeIndex]}"></bull-playlist-card>
+        <div class="arrows">
+          <bull-playlist-arrow direction="left" @arrow-clicked="${this._handleArrow}"></bull-playlist-arrow>
+          <bull-playlist-arrow direction="right" @arrow-clicked="${this._handleArrow}"></bull-playlist-arrow>
+        </div>
+        <div class="indicators">
+          <bull-playlist-indicator
+            count="${this.images.length}"
+            active="${this.activeIndex}"
+            @indicator-clicked="${this._handleIndicator}"
+          ></bull-playlist-indicator>
+        </div>
+      </div>
+    `;
+  }
+
   static get haxProperties() {
-    return new URL(`./lib/${this.tag}.haxProperties.json`, import.meta.url)
-      .href;
+    return new URL(`./lib/${this.tag}.haxProperties.json`, import.meta.url).href;
   }
 }
 

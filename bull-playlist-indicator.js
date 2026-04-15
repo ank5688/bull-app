@@ -7,8 +7,8 @@ import { DDDSuper } from "@haxtheweb/d-d-d/d-d-d.js";
 import { I18NMixin } from "@haxtheweb/i18n-manager/lib/I18NMixin.js";
 
 /**
- * `bull-playlist`
- * 
+ * `bull-playlist-indicator`
+ *
  * @demo index.html
  * @element bull-playlist-indicator
  */
@@ -20,51 +20,73 @@ export class BullPlaylistIndicator extends DDDSuper(I18NMixin(LitElement)) {
 
   constructor() {
     super();
-    
-   }
+    this.count = 0;
+    this.active = 0;
+  }
 
-  // Lit reactive properties
   static get properties() {
     return {
       ...super.properties,
-      title: { type: String },
+      count: { type: Number },
+      active: { type: Number },
     };
   }
 
-  // Lit scoped styles
   static get styles() {
     return [super.styles,
     css`
       :host {
         display: block;
-        color: var(--ddd-theme-primary);
-        background-color: var(--ddd-theme-accent);
-        font-family: var(--ddd-font-navigation);
       }
-      .wrapper {
-        margin: var(--ddd-spacing-2);
-        padding: var(--ddd-spacing-4);
+      .indicators {
+        display: flex;
+        justify-content: center;
+        gap: var(--ddd-spacing-2, 8px);
+        padding: var(--ddd-spacing-3, 12px) 0;
       }
-      h3 span {
-        font-size: var(--bull-app-label-font-size, var(--ddd-font-size-s));
+      button {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        border: 2px solid white;
+        background-color: transparent;
+        cursor: pointer;
+        padding: 0;
+        transition: background-color 0.2s;
+      }
+      button.active {
+        background-color: white;
+      }
+      button:hover {
+        background-color: rgba(255, 255, 255, 0.6);
       }
     `];
   }
 
-  // Lit render the HTML
-  render() {
-    return html`
-<div class="wrapper">
-  <slot></slot>
-</div>`;
+  _handleDotClick(index) {
+    this.dispatchEvent(new CustomEvent('indicator-clicked', {
+      detail: { index },
+      bubbles: true,
+      composed: true,
+    }));
   }
 
-  /**
-   * haxProperties integration via file reference
-   */
+  render() {
+    return html`
+      <div class="indicators">
+        ${Array.from({ length: this.count }, (_, i) => html`
+          <button
+            class="${i === this.active ? 'active' : ''}"
+            @click="${() => this._handleDotClick(i)}"
+            aria-label="Go to image ${i + 1}"
+          ></button>
+        `)}
+      </div>
+    `;
+  }
+
   static get haxProperties() {
-    return new URL(`./lib/${this.tag}.haxProperties.json`, import.meta.url)
-      .href;
+    return new URL(`./lib/${this.tag}.haxProperties.json`, import.meta.url).href;
   }
 }
 
