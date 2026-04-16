@@ -5,6 +5,7 @@
 import { LitElement, html, css } from "lit";
 import { DDDSuper } from "@haxtheweb/d-d-d/d-d-d.js";
 import { I18NMixin } from "@haxtheweb/i18n-manager/lib/I18NMixin.js";
+import eventsData from "./bull-calendar-events-data.json";
 
 /**
  * `bull-app`
@@ -42,9 +43,7 @@ export class BullCalendar extends LitElement {
     const calendar = new FullCalendar.Calendar(calendarEl, {
       initialView: "dayGridMonth",
       height: "auto",
-      events: [
-        { title: "Test Event", date: new Date().toISOString().split("T")[0] }
-      ]
+      events: eventsData
     });
 
     calendar.render();
