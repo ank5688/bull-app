@@ -4,6 +4,7 @@ import { rollupPluginHTML as html } from '@web/rollup-plugin-html';
 import { importMetaAssets } from '@web/rollup-plugin-import-meta-assets';
 import esbuild from 'rollup-plugin-esbuild';
 import json from '@rollup/plugin-json';
+import copy from 'rollup-plugin-copy';
 
 export default {
   input: 'index.html',
@@ -20,6 +21,16 @@ export default {
     /** Enable using HTML as rollup entrypoint */
     html({
       minify: true,
+    }),
+    /** Copy static assets */
+    copy({
+      targets: [
+        { src: '*.jpg', dest: 'public' },
+        { src: '*.jpeg', dest: 'public' },
+        { src: '*.png', dest: 'public' },
+        { src: '*.avif', dest: 'public' },
+        { src: '*.webp', dest: 'public' },
+      ]
     }),
     /** Resolve bare module imports */
     nodeResolve(),
