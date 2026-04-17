@@ -25,11 +25,9 @@ export class BullPlaylist extends DDDSuper(I18NMixin(LitElement)) {
     super();
     this.activeIndex = 0;
     this.images = [
-      "https://picsum.photos/seed/bull1/1200/450",
-      "https://picsum.photos/seed/bull2/1200/450",
-      "https://picsum.photos/seed/bull3/1200/450",
-      "https://picsum.photos/seed/bull4/1200/450",
-      "https://picsum.photos/seed/bull5/1200/450",
+      "headerimage1.jpg",
+      "headerimage2.jpeg",
+      "headerimage3.jpeg",
     ];
   }
 
