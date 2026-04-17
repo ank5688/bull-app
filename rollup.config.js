@@ -3,6 +3,7 @@ import babel from '@rollup/plugin-babel';
 import { rollupPluginHTML as html } from '@web/rollup-plugin-html';
 import { importMetaAssets } from '@web/rollup-plugin-import-meta-assets';
 import esbuild from 'rollup-plugin-esbuild';
+import json from '@rollup/plugin-json';
 
 export default {
   input: 'index.html',
@@ -23,6 +24,7 @@ export default {
     /** Resolve bare module imports */
     nodeResolve(),
     /** Minify JS, compile JS to a lower language target */
+    json(),
     esbuild({
       minify: true,
       target: ['chrome64', 'firefox67'],
