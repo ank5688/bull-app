@@ -3,6 +3,8 @@ import babel from '@rollup/plugin-babel';
 import { rollupPluginHTML as html } from '@web/rollup-plugin-html';
 import { importMetaAssets } from '@web/rollup-plugin-import-meta-assets';
 import esbuild from 'rollup-plugin-esbuild';
+import json from '@rollup/plugin-json';
+import copy from 'rollup-plugin-copy';
 
 export default {
   input: 'index.html',
@@ -20,12 +22,23 @@ export default {
     html({
       minify: true,
     }),
+    /** Copy static assets */
+    copy({
+      targets: [
+        { src: '*.jpg', dest: 'public' },
+        { src: '*.jpeg', dest: 'public' },
+        { src: '*.png', dest: 'public' },
+        { src: '*.avif', dest: 'public' },
+        { src: '*.webp', dest: 'public' },
+      ]
+    }),
     /** Resolve bare module imports */
     nodeResolve(),
     /** Minify JS, compile JS to a lower language target */
+    json(),
     esbuild({
       minify: true,
-      target: ['chrome64', 'firefox67', 'safari11.1'],
+      target: ['chrome64', 'firefox67'],
     }),
     /** Bundle assets references via import.meta.url */
     importMetaAssets(),
