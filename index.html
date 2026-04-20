@@ -238,6 +238,12 @@
     document.getElementById('calendarBtn').addEventListener('click', () => {
       document.getElementById('demo').style.display = 'none';
       document.getElementById('pagesContainer').style.display = 'block';
+      document.querySelector('bull-pages').activePage = 'calendar';
+    });
+    document.getElementById('aboutBtn').addEventListener('click', () => {
+      document.getElementById('demo').style.display = 'none';
+      document.getElementById('pagesContainer').style.display = 'block';
+      document.querySelector('bull-pages').activePage = 'about';
     });
   </script>
 
@@ -250,8 +256,8 @@
 
 
 
-//3f0d12
+<!-- //3f0d12
 //a71d31
 //f1f0cc
 //d5bf86
-//8d775f
+//8d775f -->

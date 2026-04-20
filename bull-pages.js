@@ -98,6 +98,11 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
           @click="${() => this.activePage = 'roster'}">
           Roster
         </button>
+       <button 
+          class="${this.activePage === 'about' ? 'active' : ''}"
+          @click="${() => this.activePage = 'about'}">
+           About
+        </button>
       </nav>
 
       ${this.activePage === 'calendar'
@@ -107,6 +112,28 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
       ${this.activePage === 'roster'
         ? html`<bull-roster></bull-roster>`
         : ''}
+      ${this.activePage === 'about'
+  ? html`
+    <div style="background: rgba(61, 33, 18, 0.95); border-radius: 1rem; padding: var(--ddd-spacing-4); color: #f1f0cc;">
+      <h2>About the Bull Poker League</h2>
+      <p>Welcome to the Bull Poker League, home of the Holy Cow High Rollers!</p>
+      
+      <h3>Our Mission</h3>
+      <p>The Bull Poker League is dedicated to bringing together skilled poker players for competitive tournaments and social gaming events. We celebrate strategy, skill, and the spirit of friendly competition.</p>
+      
+      <h3>What We Offer</h3>
+      <ul>
+        <li><strong>Regular Tournaments</strong> - Monthly competitions with varying stakes and formats</li>
+        <li><strong>Player Development</strong> - Learn from experienced players and improve your game</li>
+        <li><strong>Community</strong> - Meet fellow poker enthusiasts and build lasting connections</li>
+        <li><strong>Professional Events</strong> - Organized games with fair play standards</li>
+      </ul>
+      
+      <h3>Contact Us</h3>
+      <p>Have questions? Want to join the league? Reach out to us at <a href="mailto:info@bullpokerleague.com" style="color: #a71d31;">info@bullpokerleague.com</a></p>
+    </div>
+  `
+  : ''}
     </div>`;
   }
 
