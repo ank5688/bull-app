@@ -8,5 +8,25 @@
     "type": "Away",
     "date": "2026-04-22",
     "opponent": "Chicago Bulls"
+  },
+  {
+    "type": "Practice",
+    "date": "2026-04-20",
+    "opponent": "N/A"
+  },
+  {
+    "type": "Practice",
+    "date": "2026-04-04",
+    "opponent": "N/A"
+  },
+  {
+    "type": "Practice",
+    "date": "2026-04-11",
+    "opponent": "N/A"
+  },
+  {
+    "type": "Practice",
+    "date": "2026-04-18",
+    "opponent": "N/A"
   }
 ]

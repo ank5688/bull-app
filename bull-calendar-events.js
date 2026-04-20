@@ -2,71 +2,32 @@
  * Copyright 2026 Mayita
  * @license Apache-2.0, see LICENSE for full text.
  */
-import { LitElement, html, css } from "lit";
-import { DDDSuper } from "@haxtheweb/d-d-d/d-d-d.js";
-import { I18NMixin } from "@haxtheweb/i18n-manager/lib/I18NMixin.js";
 
-
-/**
- * `bull-calendar-events`
- * 
- * @demo index.html
- * @element bull-calendar-events
- */
-export class BullCalendarEvents extends DDDSuper(I18NMixin(LitElement)) {
-
-  static get tag() {
-    return "bull-calendar-events";
-  }
-
-  constructor() {
-    super();
-    
-   }
-
-  // Lit reactive properties
-  static get properties() {
-    return {
-      ...super.properties,
-      title: { type: String },
-    };
-  }
-
-  // Lit scoped styles
-  static get styles() {
-    return [super.styles,
-    css`
-      :host {
-        display: block;
-        color: var(--ddd-theme-primary);
-        background-color: var(--ddd-theme-accent);
-        font-family: var(--ddd-font-navigation);
-      }
-      .wrapper {
-        margin: var(--ddd-spacing-2);
-        padding: var(--ddd-spacing-4);
-      }
-      h3 span {
-        font-size: var(--bull-app-label-font-size, var(--ddd-font-size-s));
-      }
-    `];
-  }
-
-  // Lit render the HTML
-  render() {
-    return html`
-<div class="wrapper">
-  <slot></slot>
-</div>`;
-  }
-
-  /**
-   * haxProperties integration via file reference
-   */
-  static get haxProperties() {
-    return new URL(`./lib/${this.tag}.haxProperties.json`, import.meta.url)
-      .href;
+class BullCalendarEvents extends HTMLElement {
+  connectedCallback() {
+    const type = this.getAttribute('type') || '';
+    const opponent = this.getAttribute('opponent') || '';
+    this.innerHTML = `
+      <style>
+        .event {
+          background-color: #e0e0e0;
+          border: 1px solid #ccc;
+          padding: 4px 8px;
+          margin: 2px 0;
+          cursor: pointer;
+          border-radius: 4px;
+          font-size: 12px;
+        }
+        .event:hover {
+          background-color: #d0d0d0;
+        }
+      </style>
+      <div class="event">${type} vs ${opponent}</div>
+    `;
+    this.querySelector('.event').addEventListener('click', () => {
+      this.dispatchEvent(new CustomEvent('event-clicked', { bubbles: true }));
+    });
   }
 }
 
-globalThis.customElements.define(BullCalendarEvents.tag, BullCalendarEvents);
+customElements.define('bull-calendar-events', BullCalendarEvents);
