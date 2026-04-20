@@ -7,6 +7,7 @@ import { DDDSuper } from "@haxtheweb/d-d-d/d-d-d.js";
 import { I18NMixin } from "@haxtheweb/i18n-manager/lib/I18NMixin.js";
 import "./bull-calendar.js";
 import "./bull-roster.js";
+import "./bull-events.js";
 
 /**
  * `bull-pages`
@@ -98,14 +99,23 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
           @click="${() => this.activePage = 'roster'}">
           Roster
         </button>
+        <button 
+          class="${this.activePage === 'events' ? 'active' : ''}"
+          @click="${() => this.activePage = 'events'}">
+          Events
+        </button>
       </nav>
 
       ${this.activePage === 'calendar'
-        ? html`<bull-calendar></bull-calendar>`
+        ? html`<bull-calendar @event-clicked=${() => this.activePage = 'events'}></bull-calendar>`
         : ''}
 
       ${this.activePage === 'roster'
         ? html`<bull-roster></bull-roster>`
+        : ''}
+
+      ${this.activePage === 'events'
+        ? html`<bull-events></bull-events>`
         : ''}
     </div>`;
   }
