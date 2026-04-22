@@ -115,12 +115,8 @@ export class BullBanner extends DDDSuper(I18NMixin(LitElement)) {
     this.dispatchEvent(new CustomEvent('calendar-click', { bubbles: true, composed: true }));
   };
 
-  handlePlayersClick = () => {
-    this.dispatchEvent(new CustomEvent('players-click', { bubbles: true, composed: true }));
-  };
-
-  handleBullsClick = () => {
-    this.dispatchEvent(new CustomEvent('bulls-click', { bubbles: true, composed: true }));
+  handleRosterClick = () => {
+    this.dispatchEvent(new CustomEvent('roster-click', { bubbles: true, composed: true }));
   };
 
   handleAboutClick = () => {
@@ -146,8 +142,7 @@ export class BullBanner extends DDDSuper(I18NMixin(LitElement)) {
         </div>
         <div class="header-buttons">
           <button @click=${this.handleCalendarClick} id="calendarBtn">Calendar</button>
-          <button @click=${this.handlePlayersClick} id="playersBtn">Players</button>
-          <button @click=${this.handleBullsClick} id="bullsBtn">Bulls</button>
+          <button @click=${this.handleRosterClick} id="rosterBtn">Roster</button>
           <button @click=${this.handleAboutClick} id="aboutBtn">About</button>
         </div>
       </header>

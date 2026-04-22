@@ -166,7 +166,6 @@
   </div>
   <div id="pagesContainer" style="display: none;">
     <bull-pages activePage="calendar"></bull-pages>
-    <bull-pages activePage="about"></bull-pages>
   </div>
  
 
@@ -185,14 +184,7 @@
         if (bullPages) bullPages.activePage = 'calendar';
       });
 
-      banner.addEventListener('players-click', () => {
-        demo.style.display = 'none';
-        pagesContainer.style.display = 'block';
-        const bullPages = pagesContainer.querySelector('bull-pages');
-        if (bullPages) bullPages.activePage = 'roster';
-      });
-
-      banner.addEventListener('bulls-click', () => {
+      banner.addEventListener('roster-click', () => {
         demo.style.display = 'none';
         pagesContainer.style.display = 'block';
         const bullPages = pagesContainer.querySelector('bull-pages');
