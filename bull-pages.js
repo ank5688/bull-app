@@ -99,6 +99,10 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
           Roster
         </button>
         <button
+          class="${this.activePage === 'about' ? 'active' : ''}"
+          @click="${() => this.activePage = 'about'}">
+          About
+        </button>
       </nav>
 
       ${this.activePage === 'calendar'
@@ -107,6 +111,17 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
 
       ${this.activePage === 'roster'
         ? html`<bull-roster></bull-roster>`
+        : ''}
+
+      ${this.activePage === 'about'
+        ? html`<div style="padding: var(--ddd-spacing-4);">
+            <h2>About the Bull Poker League</h2>
+            <p>Welcome to the Bull Poker League, home of the Holy Cow High Rollers. We are a premier poker league featuring the best players and legendary bulls competing for glory and cash prizes.</p>
+            <h3>Our Mission</h3>
+            <p>To create an exciting and competitive poker environment where skill, strategy, and a bit of luck determine the champions.</p>
+            <h3>Featured Players & Bulls</h3>
+            <p>Our league showcases talented players competing alongside our iconic bull mascots. Check out our roster to learn more about each participant.</p>
+          </div>`
         : ''}
     </div>`;
   }
