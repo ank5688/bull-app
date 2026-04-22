@@ -92,13 +92,13 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
           class="${this.activePage === 'calendar' ? 'active' : ''}"
           @click="${() => this.activePage = 'calendar'}">
           Calendar
-          
         </button>
         <button 
           class="${this.activePage === 'roster' ? 'active' : ''}"
           @click="${() => this.activePage = 'roster'}">
           Roster
         </button>
+        <button
       </nav>
 
       ${this.activePage === 'calendar'
