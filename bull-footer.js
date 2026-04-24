@@ -5,21 +5,19 @@
 import { LitElement, html, css } from "lit";
 import { DDDSuper } from "@haxtheweb/d-d-d/d-d-d.js";
 import { I18NMixin } from "@haxtheweb/i18n-manager/lib/I18NMixin.js";
-import "./bull-calendar.js";
-import "./bull-roster.js";
-import "./bull-events.js";
+
 
 
 /**
  * `bull-banner`
  * 
  * @demo index.html
- * @element bull-banner
+ * @element bull-footer
  */
-export class BullBanner extends DDDSuper(I18NMixin(LitElement)) {
+export class BullFooter extends DDDSuper(I18NMixin(LitElement)) {
 
   static get tag() {
-    return "bull-banner";
+    return "bull-footer";
   }
 
   // Lit reactive properties
@@ -83,22 +81,10 @@ export class BullBanner extends DDDSuper(I18NMixin(LitElement)) {
       color: var(--ddd-theme-default-error);
       font-weight: var(--ddd-font-weight-regular);
     }
-    .header-buttons {
+    .title-text {
       display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      justify-content: flex-end;
-    }
-    .header-buttons button {
-      background: var(--ddd-theme-default-original87Pink);
-      color: var(--ddd-theme-default-warningLight);
-      padding: 0.75rem 1rem;
-      border-radius: var(--ddd-radius-rounded);
-      cursor: pointer;
-      font: inherit;
-    }
-    .header-buttons button:hover {
-      background: var(--ddd-theme-default-original87PinkHover);
+      flex-direction: column;
+      gap: var(--ddd-spacing-2);
     }
     .title-wrapper img {
       cursor: pointer;
@@ -107,24 +93,15 @@ export class BullBanner extends DDDSuper(I18NMixin(LitElement)) {
       opacity: 0.8;
       transition: opacity 0.2s ease;
     }
+    .icons {
+        display: flex;
+        gap: var(--ddd-spacing-2);
+    }
+    img{
+        padding: var(--ddd-spacing-3);
+    }
     `];
   }
-
-  handleCalendarClick = () => {
-    this.dispatchEvent(new CustomEvent('calendar-click', { bubbles: true, composed: true }));
-  };
-
-  handleRosterClick = () => {
-    this.dispatchEvent(new CustomEvent('roster-click', { bubbles: true, composed: true }));
-  };
-
-  handleAboutClick = () => {
-    this.dispatchEvent(new CustomEvent('about-click', { bubbles: true, composed: true }));
-  };
-
-  handleHomeClick = () => {
-    this.dispatchEvent(new CustomEvent('home-click', { bubbles: true, composed: true }));
-  };
 
   // Lit render the HTML
   render() {
@@ -135,15 +112,15 @@ export class BullBanner extends DDDSuper(I18NMixin(LitElement)) {
         <div class="title-wrapper">
           <img src="bull-icon-color.png" alt="Bull icon" @click=${this.handleHomeClick}>
           <div class="title-text">
-            <h1>Bull Poker League</h1>
-            <h2>Home of the Holy Cow High Rollers</h2>
+            <h1>Connect With Us</h1>
+            <div class="icons">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8qOK7A5IKaNOw-ZPeg_2OOD5ZIW3JOha8FA&s">
+                <img src="https://play-lh.googleusercontent.com/KCMTYuiTrKom4Vyf0G4foetVOwhKWzNbHWumV73IXexAIy5TTgZipL52WTt8ICL-oIo">
+                <img src="https://play-lh.googleusercontent.com/kMofEFLjobZy_bCuaiDogzBcUT-dz3BBbOrIEjJ-hqOabjK8ieuevGe6wlTD15QzOqw=s256-rw">
+            </div>
           </div>
         </div>
-        <div class="header-buttons">
-          <button @click=${this.handleCalendarClick} id="calendarBtn">Calendar</button>
-          <button @click=${this.handleRosterClick} id="rosterBtn">Roster</button>
-          <button @click=${this.handleAboutClick} id="aboutBtn">About</button>
-        </div>
+        
       </header>
     </div>`;
   }
@@ -157,4 +134,4 @@ export class BullBanner extends DDDSuper(I18NMixin(LitElement)) {
   }
 }
 
-globalThis.customElements.define(BullBanner.tag, BullBanner);
+globalThis.customElements.define(BullFooter.tag, BullFooter);

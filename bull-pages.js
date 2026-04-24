@@ -67,7 +67,7 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
       nav button.active {
         background-color: var(--ddd-theme-primary);
         color: var(--ddd-theme-accent);
-        font-weight: bold;
+        font-weight: var(--ddd-font-weight-bold);
       }
       h3 span {
         font-size: var(--bull-app-label-font-size, var(--ddd-font-size-s));
