@@ -41,8 +41,8 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
     css`
       :host {
         display: block;
-        color: var(--ddd-theme-primary);
-        background-color: var(--ddd-theme-accent);
+        color: var(--ddd-theme-default-original87Pink);
+        background-color: var(--ddd-theme-default-alertUrgent);
         font-family: var(--ddd-font-navigation);
       }
       .wrapper {
@@ -111,6 +111,14 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
         border-radius: 0.75rem;
         border: 2px solid rgba(241, 240, 204, 0.14);
       }
+      iframe {
+        width: 100%;
+        max-width: 560px;
+        height: 315px;
+        margin: var(--ddd-spacing-4) 0;
+        border-radius: var(--ddd-radius-lg);
+        border: none;
+      }
     `];
   }
 
@@ -123,28 +131,41 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
         : ''}
 
       ${this.activePage === 'roster'
-        ? html`<section class="team-box" aria-label="Players and Bulls overview">
-          <div class="team-row">
-            <div class="team-label">Players</div>
-            <div class="team-images">
-              <img src="player1.jpg" alt="Player 1">
-              <img src="player2.jpeg" alt="Player 2">
-              <img src="player3.png" alt="Player 3">
-              <img src="player4.jpg" alt="Player 4">
-              <img src="player5.jpg" alt="Player 5">
+        ? html`
+          <section class="team-box" aria-label="Players overview">
+            <div class="team-row">
+              <div class="team-label">Players</div>
+              <div class="team-images">
+                <img src="player1.jpg" alt="Player 1">
+                <img src="player2.jpeg" alt="Player 2">
+                <img src="player3.png" alt="Player 3">
+                <img src="player4.jpg" alt="Player 4">
+                <img src="player5.jpg" alt="Player 5">
+              </div>
             </div>
-          </div>
-          <div class="team-row">
-            <div class="team-label">Bulls</div>
-            <div class="team-images">
-              <img src="bull1.jpg" alt="Bull 1">
-              <img src="bull2real.png" alt="Bull 2">
-              <img src="bull3real.png" alt="Bull 3">
-              <img src="bull4-real.png" alt="Bull 4">
-              <img src="bull5.jpg" alt="Bull 5">
+          </section>
+          
+          <p style="padding: var(--ddd-spacing-4); color: var(--ddd-theme-default-original87Pink;">
+            Our talented poker players bring skill, strategy, and personality to every game. Each player has been carefully selected for their expertise and competitive spirit.
+          </p>
+          
+          <section class="team-box" aria-label="Bulls overview">
+            <div class="team-row">
+              <div class="team-label">Bulls</div>
+              <div class="team-images">
+                <img src="bull1.jpg" alt="Bull 1">
+                <img src="bull2real.png" alt="Bull 2">
+                <img src="bull3real.png" alt="Bull 3">
+                <img src="bull4-real.png" alt="Bull 4">
+                <img src="bull5.jpg" alt="Bull 5">
+              </div>
             </div>
-          </div>
-        </section>`
+          </section>
+          
+          <p style="padding: var(--ddd-spacing-4); color: var(--ddd-theme-default-original87Pink);">
+            Our majestic bulls are the heart of the Bull Poker League. These magnificent creatures represent strength, tradition, and the wild spirit of competition.
+          </p>
+        `
         : ''}
 
       ${this.activePage === 'about'
@@ -155,8 +176,18 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
             <p>To create an exciting and competitive poker environment where skill, strategy, and a bit of luck determine the champions.</p>
             <h3>Featured Players & Bulls</h3>
             <p>Our league showcases talented players competing alongside our iconic bull mascots. Check out our roster to learn more about each participant.</p>
+            <iframe 
+              width="560" 
+              height="315" 
+              src="https://www.youtube.com/embed/z7uSSd8IhCw" 
+              title="YouTube video player" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              allowfullscreen>
+            </iframe>
           </div>`
         : ''}
+        
     </div>`;
   }
 

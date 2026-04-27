@@ -29,7 +29,8 @@ class BullCalendar extends HTMLElement {
           background-color: var(--ddd-theme-default-warningLight);
         }
         th {
-          background-color: var(--ddd-theme-default-warning);
+          background-color: var(--ddd-theme-default-original87Pink);
+          color: var(--ddd-theme-default-alertUrgent);
         }
         .day {
           position: absolute;
@@ -50,7 +51,7 @@ class BullCalendar extends HTMLElement {
         .event-item {
           margin: var(--ddd-spacing-1) 0;
           padding: var(--ddd-spacing-1);
-          background-color: #f9f9f9;
+          background-color: var(--ddd-theme-default-warningLight);
           border-radius: var(--ddd-radius-xs);
         }
       </style>
